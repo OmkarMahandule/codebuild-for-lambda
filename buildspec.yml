@@ -3,13 +3,8 @@ version: 0.2
 phases:
   build:
     commands:
-      - echo "Checking environment"
-      - pwd
+      - echo "Debugging..."
       - ls -la
       - which zip
       - zip --version
       - zip -r deployment_package.zip lambda_function.py
-
-  post_build:
-    commands:
-      - aws lambda update-function-code --function-name hello_world --zip-file fileb://deployment_package.zip
