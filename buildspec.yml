@@ -1,21 +1,15 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - yum install -y zip
-
   build:
     commands:
-      - echo "This is build phase... Zipping my lambda function"
+      - echo "Checking environment"
+      - pwd
       - ls -la
+      - which zip
+      - zip --version
       - zip -r deployment_package.zip lambda_function.py
 
   post_build:
     commands:
-      - echo "Deploying to the Lambda"
-      - aws lambda update-function-code --function-name Hello_world --zip-file fileb://deployment_package.zip
-
-artifacts:
-  files:
-    - deployment_package.zip
+      - aws lambda update-function-code --function-name hello_world --zip-file fileb://deployment_package.zip
